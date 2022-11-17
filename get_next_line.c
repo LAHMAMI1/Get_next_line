@@ -6,10 +6,11 @@
 /*   By: olahmami <olahmami@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 23:17:32 by olahmami          #+#    #+#             */
-/*   Updated: 2022/11/15 23:17:50 by olahmami         ###   ########.fr       */
+/*   Updated: 2022/11/17 19:09:43 by olahmami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "get_next_line.h"
 
 char *get_next_line(int fd)
 {
