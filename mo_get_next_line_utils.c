@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   mo_get_next_line_utils.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: olahmami <olahmami@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/18 14:49:11 by olahmami          #+#    #+#             */
-/*   Updated: 2022/11/18 19:54:47 by olahmami         ###   ########.fr       */
+/*   Created: 2022/11/15 23:17:38 by olahmami          #+#    #+#             */
+/*   Updated: 2022/11/18 17:39:43 by olahmami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+//#include "get_next_line.h"
 
-size_t	ft_strlen(char *s)
+size_t	ft_strlen(const char *s)
 {
 	size_t	i;
 
@@ -22,7 +22,7 @@ size_t	ft_strlen(char *s)
 	return (i);
 }
 
-char	*ft_strncpy(char *dest, char *src, size_t n)
+char	*ft_strncpy(char *dest, const char *src, size_t n)
 {
 	size_t	i;
 
@@ -34,30 +34,6 @@ char	*ft_strncpy(char *dest, char *src, size_t n)
 	}
 	dest[i] = '\0';
 	return (dest);
-}
-
-char	*ft_strdup(char *s1)
-{
-	char	*str;
-
-	str = malloc(ft_strlen(s1) + 1);
-	if (!str)
-		return (0);
-	return (ft_strncpy(str, s1, ft_strlen(s1) + 1));
-}
-
-int	ft_strchr(char *s, int c)
-{
-	unsigned int	i;
-
-	i = 0;
-	while (s[i])
-	{
-		if ((char)c == s[i])
-			return (i);
-		i++;
-	}
-	return (0);
 }
 
 char	*ft_strjoin(char *s1, char *s2)
@@ -79,4 +55,20 @@ char	*ft_strjoin(char *s1, char *s2)
 		ft_strncpy(p + s1len, s2, s2len + 1);
 	}
 	return (p);
+}
+
+int ft_strchr(char *s, int c)
+{
+	unsigned int	i;
+
+	i = 0;
+	if(!s)
+		return 0;
+	while (s[i])
+	{
+		if ((char)c == s[i])
+			return i;
+		i++;
+	}
+	return (0);
 }
