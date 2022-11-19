@@ -6,7 +6,7 @@
 /*   By: olahmami <olahmami@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 14:49:11 by olahmami          #+#    #+#             */
-/*   Updated: 2022/11/18 19:54:47 by olahmami         ###   ########.fr       */
+/*   Updated: 2022/11/19 20:23:56 by olahmami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,12 @@ char	*ft_strncpy(char *dest, char *src, size_t n)
 {
 	size_t	i;
 
+	if (!src && !dest)
+		return (NULL);
+	if (src == dest)
+		return (dest);
 	i = 0;
-	while (src[i] && i < n)
+	while (i < n)
 	{
 		dest[i] = src[i];
 		i++;
@@ -66,7 +70,9 @@ char	*ft_strjoin(char *s1, char *s2)
 	size_t	s2len;
 	char	*p;
 
-	if (!s1 || !s2)
+	if (!s1)
+		s1 = ft_strdup("");
+	if (!s2)
 		return (0);
 	s1len = ft_strlen(s1);
 	s2len = ft_strlen(s2);
@@ -78,5 +84,6 @@ char	*ft_strjoin(char *s1, char *s2)
 		ft_strncpy(p, s1, s1len);
 		ft_strncpy(p + s1len, s2, s2len + 1);
 	}
+	free(s1);
 	return (p);
 }
