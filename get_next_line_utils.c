@@ -6,7 +6,7 @@
 /*   By: olahmami <olahmami@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 14:49:11 by olahmami          #+#    #+#             */
-/*   Updated: 2022/11/19 20:23:56 by olahmami         ###   ########.fr       */
+/*   Updated: 2022/11/20 15:06:57 by olahmami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,32 +22,21 @@ size_t	ft_strlen(char *s)
 	return (i);
 }
 
-char	*ft_strncpy(char *dest, char *src, size_t n)
-{
-	size_t	i;
-
-	if (!src && !dest)
-		return (NULL);
-	if (src == dest)
-		return (dest);
-	i = 0;
-	while (i < n)
-	{
-		dest[i] = src[i];
-		i++;
-	}
-	dest[i] = '\0';
-	return (dest);
-}
-
 char	*ft_strdup(char *s1)
 {
 	char	*str;
-
+	int i;
+	i= 0;
 	str = malloc(ft_strlen(s1) + 1);
 	if (!str)
 		return (0);
-	return (ft_strncpy(str, s1, ft_strlen(s1) + 1));
+	while (s1[i])
+	{
+		str[i]=s1[i];
+		i++;
+	}
+	str[i]=0;
+	return (str);
 }
 
 int	ft_strchr(char *s, int c)
@@ -61,7 +50,20 @@ int	ft_strchr(char *s, int c)
 			return (i);
 		i++;
 	}
+	if ((char)c == 0)
+		return (i);
 	return (0);
+}
+int	ft_strlen_n(char *s, int c)
+{
+	unsigned int	i;
+
+	i = 0;
+	while (s[i]&&s[i]!=c)
+	{
+		i++;
+	}
+	return (i);
 }
 
 char	*ft_strjoin(char *s1, char *s2)
@@ -69,21 +71,25 @@ char	*ft_strjoin(char *s1, char *s2)
 	size_t	s1len;
 	size_t	s2len;
 	char	*p;
+	int i;
 
-	if (!s1)
-		s1 = ft_strdup("");
-	if (!s2)
-		return (0);
-	s1len = ft_strlen(s1);
-	s2len = ft_strlen(s2);
+	i=0;
+	s1len = ft_strlen_n(s1,0);
+	s2len = ft_strlen_n(s2,0);
 	p = (char *)malloc(s1len + s2len + 1);
 	if (!p)
 		return (0);
-	else
+	while (s1[i])
 	{
-		ft_strncpy(p, s1, s1len);
-		ft_strncpy(p + s1len, s2, s2len + 1);
+		p[i]=s1[i];
+		i++;
 	}
+	while (*s2)
+	{
+		p[i]=*s2++;
+		i++;
+	}
+	p[i]=0;
 	free(s1);
 	return (p);
 }

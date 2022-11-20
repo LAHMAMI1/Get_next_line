@@ -6,7 +6,7 @@
 /*   By: olahmami <olahmami@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 14:49:13 by olahmami          #+#    #+#             */
-/*   Updated: 2022/11/19 18:24:26 by olahmami         ###   ########.fr       */
+/*   Updated: 2022/11/20 15:05:28 by olahmami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,25 +17,26 @@ char *ft_read(int fd, char *buff)
 	char *str;
 	int check;
 
-	
 	str = malloc(BUFFER_SIZE + 1);
 	if (!str)
 		return (0);
+	if (!buff)
+		buff = ft_strdup("");
 	check = 1;
 	while (ft_strchr(buff, '\n') == 0 && check != 0)
 	{
 		check = read(fd, str, BUFFER_SIZE);
 		if (check == -1)
 		{
-			free(buff);
-			free(str);
-			return(0);
+			free (str);
+			free (buff);
+			return (0);
 		}
 		str[check] = '\0';
 		buff = ft_strjoin(buff, str);
 	}
 	free (str);
-	return buff;
+	return (buff);
 }
 
 char *ft_firstl(char *buff)
@@ -45,9 +46,7 @@ char *ft_firstl(char *buff)
 	int i;
 	
 	i = 0;
-	if(!buff[i])
-		return(0);
-	len = ft_strchr(buff, '\n');
+	len = ft_strlen_n(buff, '\n');
 	line = malloc(len + 1 + (buff[len] == '\n'));
 	if (!line)
 		return (0);
@@ -72,11 +71,6 @@ char *ft_nextl(char *buff)
 	int j;
 
 	i = 0;
-	if(!buff[i])
-	{
-		free(buff);
-		return(0);
-	}
 	while (buff[i] && buff[i] != '\n')
 		i++;
 	nextl = malloc(ft_strlen(buff) - i + 1);
@@ -98,9 +92,16 @@ char *get_next_line(int fd)
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (0);
 	buffer = ft_read(fd, buffer);
-	if(!buffer)
-		return (0);
+	if(!buffer||!*buffer)
+	{
+		free(buffer);
+		buffer = NULL;
+		return NULL;
+	}
 	line = ft_firstl(buffer);
+	if (!*line){
+		return NULL;
+	}
 	buffer = ft_nextl(buffer);
 	return (line);
 }
