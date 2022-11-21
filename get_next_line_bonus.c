@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: olahmami <olahmami@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/18 14:49:13 by olahmami          #+#    #+#             */
-/*   Updated: 2022/11/21 13:18:54 by olahmami         ###   ########.fr       */
+/*   Created: 2022/11/21 10:51:37 by olahmami          #+#    #+#             */
+/*   Updated: 2022/11/21 15:16:06 by olahmami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*ft_read(int fd, char *buff)
 {
@@ -86,19 +86,19 @@ char	*ft_nextl(char *buff)
 
 char	*get_next_line(int fd)
 {
-	static char		*buffer;
+	static char		*buffer[OPEN_MAX];
 	char			*line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (0);
-	buffer = ft_read(fd, buffer);
-	if (!buffer || !*buffer)
+	buffer[fd] = ft_read(fd, buffer[fd]);
+	if (!buffer[fd] || !*buffer[fd])
 	{
-		free(buffer);
-		buffer = NULL;
+		free(buffer[fd]);
+		buffer[fd] = NULL;
 		return (0);
 	}
-	line = ft_firstl(buffer);
-	buffer = ft_nextl(buffer);
+	line = ft_firstl(buffer[fd]);
+	buffer[fd] = ft_nextl(buffer[fd]);
 	return (line);
 }
