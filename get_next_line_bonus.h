@@ -6,7 +6,7 @@
 /*   By: olahmami <olahmami@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 10:51:39 by olahmami          #+#    #+#             */
-/*   Updated: 2022/11/21 15:20:05 by olahmami         ###   ########.fr       */
+/*   Updated: 2022/11/22 18:15:19 by olahmami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <limits.h>
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 10
+#  define BUFFER_SIZE 7
 # endif
 
 char	*get_next_line(int fd);

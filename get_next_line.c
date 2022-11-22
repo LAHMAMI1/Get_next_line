@@ -6,7 +6,7 @@
 /*   By: olahmami <olahmami@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 14:49:13 by olahmami          #+#    #+#             */
-/*   Updated: 2022/11/21 13:18:54 by olahmami         ###   ########.fr       */
+/*   Updated: 2022/11/22 21:06:33 by olahmami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ char	*ft_firstl(char *buff)
 	int		i;
 
 	len = ft_strlen_n(buff, '\n');
-	line = malloc(len + 1 + (buff[len] == '\n'));
+	line = malloc(len + 2);
 	if (!line)
 		return (0);
 	i = 0;
@@ -96,7 +96,7 @@ char	*get_next_line(int fd)
 	{
 		free(buffer);
 		buffer = NULL;
-		return (0);
+		return (buffer);
 	}
 	line = ft_firstl(buffer);
 	buffer = ft_nextl(buffer);
